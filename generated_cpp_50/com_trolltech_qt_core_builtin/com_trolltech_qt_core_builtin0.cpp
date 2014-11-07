@@ -3,13 +3,14 @@
 #include <PythonQtMethodInfo.h>
 #include <PythonQtSignalReceiver.h>
 #include <QDate>
-#include <QGesture>
 #include <QStringList>
 #include <QTextDocument>
 #include <QVariant>
 #include <qbitarray.h>
 #include <qbytearray.h>
+#include <qdatastream.h>
 #include <qdatetime.h>
+#include <qline.h>
 #include <qlist.h>
 #include <qlocale.h>
 #include <qmatrix.h>
@@ -19,8 +20,10 @@
 #include <qregexp.h>
 #include <qsize.h>
 #include <qstringlist.h>
+#include <qtextcodec.h>
 #include <qtransform.h>
 #include <qurl.h>
+#include <qurlquery.h>
 
 QBitArray* PythonQtWrapper_QBitArray::new_QBitArray()
 { 
@@ -94,6 +97,11 @@ QBitArray*  PythonQtWrapper_QBitArray::__iand__(QBitArray* theWrappedObject, con
   return &( (*theWrappedObject)&= arg__1);
 }
 
+void PythonQtWrapper_QBitArray::writeTo(QBitArray* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 <<  (*theWrappedObject);
+}
+
 QBitArray*  PythonQtWrapper_QBitArray::operator_assign(QBitArray* theWrappedObject, const QBitArray&  other)
 {
   return &( (*theWrappedObject)= other);
@@ -102,6 +110,11 @@ QBitArray*  PythonQtWrapper_QBitArray::operator_assign(QBitArray* theWrappedObje
 bool  PythonQtWrapper_QBitArray::__eq__(QBitArray* theWrappedObject, const QBitArray&  other) const
 {
   return ( (*theWrappedObject)== other);
+}
+
+void PythonQtWrapper_QBitArray::readFrom(QBitArray* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 >>  (*theWrappedObject);
 }
 
 QBitArray  PythonQtWrapper_QBitArray::__xor__(QBitArray* theWrappedObject, const QBitArray&  arg__2)
@@ -238,6 +251,21 @@ void PythonQtWrapper_QByteArray::chop(QByteArray* theWrappedObject, int  n)
 void PythonQtWrapper_QByteArray::clear(QByteArray* theWrappedObject)
 {
   ( theWrappedObject->clear());
+}
+
+bool  PythonQtWrapper_QByteArray::contains(QByteArray* theWrappedObject, char  c) const
+{
+  return ( theWrappedObject->contains(c));
+}
+
+bool  PythonQtWrapper_QByteArray::contains(QByteArray* theWrappedObject, const QByteArray&  a) const
+{
+  return ( theWrappedObject->contains(a));
+}
+
+bool  PythonQtWrapper_QByteArray::contains(QByteArray* theWrappedObject, const char*  a) const
+{
+  return ( theWrappedObject->contains(a));
 }
 
 int  PythonQtWrapper_QByteArray::count(QByteArray* theWrappedObject, char  c) const
@@ -380,9 +408,9 @@ QByteArray  PythonQtWrapper_QByteArray::static_QByteArray_number(qlonglong  arg_
   return (QByteArray::number(arg__1, base));
 }
 
-bool  PythonQtWrapper_QByteArray::__ne__(QByteArray* theWrappedObject, const QString&  s2) const
+QByteArray  PythonQtWrapper_QByteArray::static_QByteArray_number(qulonglong  arg__1, int  base)
 {
-  return ( (*theWrappedObject)!= s2);
+  return (QByteArray::number(arg__1, base));
 }
 
 const QByteArray  PythonQtWrapper_QByteArray::__add__(QByteArray* theWrappedObject, char  a2)
@@ -405,6 +433,11 @@ const QByteArray  PythonQtWrapper_QByteArray::__add__(QByteArray* theWrappedObje
   return ( (*theWrappedObject)+ a2);
 }
 
+QByteArray*  PythonQtWrapper_QByteArray::__iadd__(QByteArray* theWrappedObject, const QByteArray&  a)
+{
+  return &( (*theWrappedObject)+= a);
+}
+
 bool  PythonQtWrapper_QByteArray::__lt__(QByteArray* theWrappedObject, const QByteArray&  a2)
 {
   return ( (*theWrappedObject)< a2);
@@ -413,6 +446,11 @@ bool  PythonQtWrapper_QByteArray::__lt__(QByteArray* theWrappedObject, const QBy
 bool  PythonQtWrapper_QByteArray::__lt__(QByteArray* theWrappedObject, const QString&  s2) const
 {
   return ( (*theWrappedObject)< s2);
+}
+
+void PythonQtWrapper_QByteArray::writeTo(QByteArray* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 <<  (*theWrappedObject);
 }
 
 bool  PythonQtWrapper_QByteArray::__le__(QByteArray* theWrappedObject, const QByteArray&  a2)
@@ -460,6 +498,11 @@ bool  PythonQtWrapper_QByteArray::__ge__(QByteArray* theWrappedObject, const QSt
   return ( (*theWrappedObject)>= s2);
 }
 
+void PythonQtWrapper_QByteArray::readFrom(QByteArray* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 >>  (*theWrappedObject);
+}
+
 QByteArray*  PythonQtWrapper_QByteArray::prepend(QByteArray* theWrappedObject, char  c)
 {
   return &( theWrappedObject->prepend(c));
@@ -473,6 +516,16 @@ QByteArray*  PythonQtWrapper_QByteArray::prepend(QByteArray* theWrappedObject, c
 QByteArray*  PythonQtWrapper_QByteArray::prepend(QByteArray* theWrappedObject, const char*  s, int  len)
 {
   return &( theWrappedObject->prepend(s, len));
+}
+
+void PythonQtWrapper_QByteArray::push_back(QByteArray* theWrappedObject, const QByteArray&  a)
+{
+  ( theWrappedObject->push_back(a));
+}
+
+void PythonQtWrapper_QByteArray::push_front(QByteArray* theWrappedObject, const QByteArray&  a)
+{
+  ( theWrappedObject->push_front(a));
 }
 
 QByteArray*  PythonQtWrapper_QByteArray::remove(QByteArray* theWrappedObject, int  index, int  len)
@@ -565,7 +618,17 @@ QByteArray*  PythonQtWrapper_QByteArray::setNum(QByteArray* theWrappedObject, ql
   return &( theWrappedObject->setNum(arg__1, base));
 }
 
+QByteArray*  PythonQtWrapper_QByteArray::setNum(QByteArray* theWrappedObject, qulonglong  arg__1, int  base)
+{
+  return &( theWrappedObject->setNum(arg__1, base));
+}
+
 QByteArray*  PythonQtWrapper_QByteArray::setNum(QByteArray* theWrappedObject, short  arg__1, int  base)
+{
+  return &( theWrappedObject->setNum(arg__1, base));
+}
+
+QByteArray*  PythonQtWrapper_QByteArray::setNum(QByteArray* theWrappedObject, ushort  arg__1, int  base)
 {
   return &( theWrappedObject->setNum(arg__1, base));
 }
@@ -790,6 +853,11 @@ bool  PythonQtWrapper_QDate::__lt__(QDate* theWrappedObject, const QDate&  other
   return ( (*theWrappedObject)< other);
 }
 
+void PythonQtWrapper_QDate::writeTo(QDate* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 <<  (*theWrappedObject);
+}
+
 bool  PythonQtWrapper_QDate::__le__(QDate* theWrappedObject, const QDate&  other) const
 {
   return ( (*theWrappedObject)<= other);
@@ -808,6 +876,11 @@ bool  PythonQtWrapper_QDate::__gt__(QDate* theWrappedObject, const QDate&  other
 bool  PythonQtWrapper_QDate::__ge__(QDate* theWrappedObject, const QDate&  other) const
 {
   return ( (*theWrappedObject)>= other);
+}
+
+void PythonQtWrapper_QDate::readFrom(QDate* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 >>  (*theWrappedObject);
 }
 
 bool  PythonQtWrapper_QDate::setDate(QDate* theWrappedObject, int  year, int  month, int  day)
@@ -964,6 +1037,11 @@ bool  PythonQtWrapper_QDateTime::__lt__(QDateTime* theWrappedObject, const QDate
   return ( (*theWrappedObject)< other);
 }
 
+void PythonQtWrapper_QDateTime::writeTo(QDateTime* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 <<  (*theWrappedObject);
+}
+
 bool  PythonQtWrapper_QDateTime::__le__(QDateTime* theWrappedObject, const QDateTime&  other) const
 {
   return ( (*theWrappedObject)<= other);
@@ -982,6 +1060,11 @@ bool  PythonQtWrapper_QDateTime::__gt__(QDateTime* theWrappedObject, const QDate
 bool  PythonQtWrapper_QDateTime::__ge__(QDateTime* theWrappedObject, const QDateTime&  other) const
 {
   return ( (*theWrappedObject)>= other);
+}
+
+void PythonQtWrapper_QDateTime::readFrom(QDateTime* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 >>  (*theWrappedObject);
 }
 
 qint64  PythonQtWrapper_QDateTime::secsTo(QDateTime* theWrappedObject, const QDateTime&  arg__1) const
@@ -1075,6 +1158,342 @@ int  PythonQtWrapper_QDateTime::utcOffset(QDateTime* theWrappedObject) const
 }
 
 QString PythonQtWrapper_QDateTime::py_toString(QDateTime* obj) { return obj->toString(); }
+
+
+QLine* PythonQtWrapper_QLine::new_QLine()
+{ 
+return new QLine(); }
+
+QLine* PythonQtWrapper_QLine::new_QLine(const QPoint&  pt1, const QPoint&  pt2)
+{ 
+return new QLine(pt1, pt2); }
+
+QLine* PythonQtWrapper_QLine::new_QLine(int  x1, int  y1, int  x2, int  y2)
+{ 
+return new QLine(x1, y1, x2, y2); }
+
+int  PythonQtWrapper_QLine::dx(QLine* theWrappedObject) const
+{
+  return ( theWrappedObject->dx());
+}
+
+int  PythonQtWrapper_QLine::dy(QLine* theWrappedObject) const
+{
+  return ( theWrappedObject->dy());
+}
+
+bool  PythonQtWrapper_QLine::isNull(QLine* theWrappedObject) const
+{
+  return ( theWrappedObject->isNull());
+}
+
+bool  PythonQtWrapper_QLine::__ne__(QLine* theWrappedObject, const QLine&  d) const
+{
+  return ( (*theWrappedObject)!= d);
+}
+
+QLine  PythonQtWrapper_QLine::__mul__(QLine* theWrappedObject, const QMatrix&  m)
+{
+  return ( (*theWrappedObject)* m);
+}
+
+QLine  PythonQtWrapper_QLine::__mul__(QLine* theWrappedObject, const QTransform&  m)
+{
+  return ( (*theWrappedObject)* m);
+}
+
+void PythonQtWrapper_QLine::writeTo(QLine* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 <<  (*theWrappedObject);
+}
+
+bool  PythonQtWrapper_QLine::__eq__(QLine* theWrappedObject, const QLine&  d) const
+{
+  return ( (*theWrappedObject)== d);
+}
+
+void PythonQtWrapper_QLine::readFrom(QLine* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 >>  (*theWrappedObject);
+}
+
+QPoint  PythonQtWrapper_QLine::p1(QLine* theWrappedObject) const
+{
+  return ( theWrappedObject->p1());
+}
+
+QPoint  PythonQtWrapper_QLine::p2(QLine* theWrappedObject) const
+{
+  return ( theWrappedObject->p2());
+}
+
+void PythonQtWrapper_QLine::setLine(QLine* theWrappedObject, int  x1, int  y1, int  x2, int  y2)
+{
+  ( theWrappedObject->setLine(x1, y1, x2, y2));
+}
+
+void PythonQtWrapper_QLine::setP1(QLine* theWrappedObject, const QPoint&  p1)
+{
+  ( theWrappedObject->setP1(p1));
+}
+
+void PythonQtWrapper_QLine::setP2(QLine* theWrappedObject, const QPoint&  p2)
+{
+  ( theWrappedObject->setP2(p2));
+}
+
+void PythonQtWrapper_QLine::setPoints(QLine* theWrappedObject, const QPoint&  p1, const QPoint&  p2)
+{
+  ( theWrappedObject->setPoints(p1, p2));
+}
+
+void PythonQtWrapper_QLine::translate(QLine* theWrappedObject, const QPoint&  p)
+{
+  ( theWrappedObject->translate(p));
+}
+
+void PythonQtWrapper_QLine::translate(QLine* theWrappedObject, int  dx, int  dy)
+{
+  ( theWrappedObject->translate(dx, dy));
+}
+
+QLine  PythonQtWrapper_QLine::translated(QLine* theWrappedObject, const QPoint&  p) const
+{
+  return ( theWrappedObject->translated(p));
+}
+
+QLine  PythonQtWrapper_QLine::translated(QLine* theWrappedObject, int  dx, int  dy) const
+{
+  return ( theWrappedObject->translated(dx, dy));
+}
+
+int  PythonQtWrapper_QLine::x1(QLine* theWrappedObject) const
+{
+  return ( theWrappedObject->x1());
+}
+
+int  PythonQtWrapper_QLine::x2(QLine* theWrappedObject) const
+{
+  return ( theWrappedObject->x2());
+}
+
+int  PythonQtWrapper_QLine::y1(QLine* theWrappedObject) const
+{
+  return ( theWrappedObject->y1());
+}
+
+int  PythonQtWrapper_QLine::y2(QLine* theWrappedObject) const
+{
+  return ( theWrappedObject->y2());
+}
+
+QString PythonQtWrapper_QLine::py_toString(QLine* obj) {
+  QString result;
+  QDebug d(&result);
+  d << *obj;
+  return result;
+}
+
+
+
+QLineF* PythonQtWrapper_QLineF::new_QLineF()
+{ 
+return new QLineF(); }
+
+QLineF* PythonQtWrapper_QLineF::new_QLineF(const QLine&  line)
+{ 
+return new QLineF(line); }
+
+QLineF* PythonQtWrapper_QLineF::new_QLineF(const QPointF&  pt1, const QPointF&  pt2)
+{ 
+return new QLineF(pt1, pt2); }
+
+QLineF* PythonQtWrapper_QLineF::new_QLineF(qreal  x1, qreal  y1, qreal  x2, qreal  y2)
+{ 
+return new QLineF(x1, y1, x2, y2); }
+
+qreal  PythonQtWrapper_QLineF::angle(QLineF* theWrappedObject) const
+{
+  return ( theWrappedObject->angle());
+}
+
+qreal  PythonQtWrapper_QLineF::angle(QLineF* theWrappedObject, const QLineF&  l) const
+{
+  return ( theWrappedObject->angle(l));
+}
+
+qreal  PythonQtWrapper_QLineF::angleTo(QLineF* theWrappedObject, const QLineF&  l) const
+{
+  return ( theWrappedObject->angleTo(l));
+}
+
+qreal  PythonQtWrapper_QLineF::dx(QLineF* theWrappedObject) const
+{
+  return ( theWrappedObject->dx());
+}
+
+qreal  PythonQtWrapper_QLineF::dy(QLineF* theWrappedObject) const
+{
+  return ( theWrappedObject->dy());
+}
+
+QLineF  PythonQtWrapper_QLineF::static_QLineF_fromPolar(qreal  length, qreal  angle)
+{
+  return (QLineF::fromPolar(length, angle));
+}
+
+QLineF::IntersectType  PythonQtWrapper_QLineF::intersect(QLineF* theWrappedObject, const QLineF&  l, QPointF*  intersectionPoint) const
+{
+  return ( theWrappedObject->intersect(l, intersectionPoint));
+}
+
+bool  PythonQtWrapper_QLineF::isNull(QLineF* theWrappedObject) const
+{
+  return ( theWrappedObject->isNull());
+}
+
+qreal  PythonQtWrapper_QLineF::length(QLineF* theWrappedObject) const
+{
+  return ( theWrappedObject->length());
+}
+
+QLineF  PythonQtWrapper_QLineF::normalVector(QLineF* theWrappedObject) const
+{
+  return ( theWrappedObject->normalVector());
+}
+
+bool  PythonQtWrapper_QLineF::__ne__(QLineF* theWrappedObject, const QLineF&  d) const
+{
+  return ( (*theWrappedObject)!= d);
+}
+
+QLineF  PythonQtWrapper_QLineF::__mul__(QLineF* theWrappedObject, const QMatrix&  m)
+{
+  return ( (*theWrappedObject)* m);
+}
+
+QLineF  PythonQtWrapper_QLineF::__mul__(QLineF* theWrappedObject, const QTransform&  m)
+{
+  return ( (*theWrappedObject)* m);
+}
+
+void PythonQtWrapper_QLineF::writeTo(QLineF* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 <<  (*theWrappedObject);
+}
+
+bool  PythonQtWrapper_QLineF::__eq__(QLineF* theWrappedObject, const QLineF&  d) const
+{
+  return ( (*theWrappedObject)== d);
+}
+
+void PythonQtWrapper_QLineF::readFrom(QLineF* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 >>  (*theWrappedObject);
+}
+
+QPointF  PythonQtWrapper_QLineF::p1(QLineF* theWrappedObject) const
+{
+  return ( theWrappedObject->p1());
+}
+
+QPointF  PythonQtWrapper_QLineF::p2(QLineF* theWrappedObject) const
+{
+  return ( theWrappedObject->p2());
+}
+
+QPointF  PythonQtWrapper_QLineF::pointAt(QLineF* theWrappedObject, qreal  t) const
+{
+  return ( theWrappedObject->pointAt(t));
+}
+
+void PythonQtWrapper_QLineF::setAngle(QLineF* theWrappedObject, qreal  angle)
+{
+  ( theWrappedObject->setAngle(angle));
+}
+
+void PythonQtWrapper_QLineF::setLength(QLineF* theWrappedObject, qreal  len)
+{
+  ( theWrappedObject->setLength(len));
+}
+
+void PythonQtWrapper_QLineF::setLine(QLineF* theWrappedObject, qreal  x1, qreal  y1, qreal  x2, qreal  y2)
+{
+  ( theWrappedObject->setLine(x1, y1, x2, y2));
+}
+
+void PythonQtWrapper_QLineF::setP1(QLineF* theWrappedObject, const QPointF&  p1)
+{
+  ( theWrappedObject->setP1(p1));
+}
+
+void PythonQtWrapper_QLineF::setP2(QLineF* theWrappedObject, const QPointF&  p2)
+{
+  ( theWrappedObject->setP2(p2));
+}
+
+void PythonQtWrapper_QLineF::setPoints(QLineF* theWrappedObject, const QPointF&  p1, const QPointF&  p2)
+{
+  ( theWrappedObject->setPoints(p1, p2));
+}
+
+QLine  PythonQtWrapper_QLineF::toLine(QLineF* theWrappedObject) const
+{
+  return ( theWrappedObject->toLine());
+}
+
+void PythonQtWrapper_QLineF::translate(QLineF* theWrappedObject, const QPointF&  p)
+{
+  ( theWrappedObject->translate(p));
+}
+
+void PythonQtWrapper_QLineF::translate(QLineF* theWrappedObject, qreal  dx, qreal  dy)
+{
+  ( theWrappedObject->translate(dx, dy));
+}
+
+QLineF  PythonQtWrapper_QLineF::translated(QLineF* theWrappedObject, const QPointF&  p) const
+{
+  return ( theWrappedObject->translated(p));
+}
+
+QLineF  PythonQtWrapper_QLineF::translated(QLineF* theWrappedObject, qreal  dx, qreal  dy) const
+{
+  return ( theWrappedObject->translated(dx, dy));
+}
+
+QLineF  PythonQtWrapper_QLineF::unitVector(QLineF* theWrappedObject) const
+{
+  return ( theWrappedObject->unitVector());
+}
+
+qreal  PythonQtWrapper_QLineF::x1(QLineF* theWrappedObject) const
+{
+  return ( theWrappedObject->x1());
+}
+
+qreal  PythonQtWrapper_QLineF::x2(QLineF* theWrappedObject) const
+{
+  return ( theWrappedObject->x2());
+}
+
+qreal  PythonQtWrapper_QLineF::y1(QLineF* theWrappedObject) const
+{
+  return ( theWrappedObject->y1());
+}
+
+qreal  PythonQtWrapper_QLineF::y2(QLineF* theWrappedObject) const
+{
+  return ( theWrappedObject->y2());
+}
+
+QString PythonQtWrapper_QLineF::py_toString(QLineF* obj) {
+  QString result;
+  QDebug d(&result);
+  d << *obj;
+  return result;
+}
+
 
 
 QLocale* PythonQtWrapper_QLocale::new_QLocale()
@@ -1227,9 +1646,19 @@ bool  PythonQtWrapper_QLocale::__ne__(QLocale* theWrappedObject, const QLocale& 
   return ( (*theWrappedObject)!= other);
 }
 
+void PythonQtWrapper_QLocale::writeTo(QLocale* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 <<  (*theWrappedObject);
+}
+
 bool  PythonQtWrapper_QLocale::__eq__(QLocale* theWrappedObject, const QLocale&  other) const
 {
   return ( (*theWrappedObject)== other);
+}
+
+void PythonQtWrapper_QLocale::readFrom(QLocale* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 >>  (*theWrappedObject);
 }
 
 QChar  PythonQtWrapper_QLocale::percent(QLocale* theWrappedObject) const
@@ -1437,12 +1866,22 @@ QString  PythonQtWrapper_QLocale::toString(QLocale* theWrappedObject, int  i) co
   return ( theWrappedObject->toString(i));
 }
 
+QString  PythonQtWrapper_QLocale::toString(QLocale* theWrappedObject, qlonglong  i) const
+{
+  return ( theWrappedObject->toString(i));
+}
+
 QString  PythonQtWrapper_QLocale::toString(QLocale* theWrappedObject, qulonglong  i) const
 {
   return ( theWrappedObject->toString(i));
 }
 
 QString  PythonQtWrapper_QLocale::toString(QLocale* theWrappedObject, short  i) const
+{
+  return ( theWrappedObject->toString(i));
+}
+
+QString  PythonQtWrapper_QLocale::toString(QLocale* theWrappedObject, ushort  i) const
 {
   return ( theWrappedObject->toString(i));
 }
@@ -1594,9 +2033,19 @@ QPoint*  PythonQtWrapper_QPoint::__idiv__(QPoint* theWrappedObject, qreal  divis
   return &( (*theWrappedObject)/= divisor);
 }
 
+void PythonQtWrapper_QPoint::writeTo(QPoint* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 <<  (*theWrappedObject);
+}
+
 bool  PythonQtWrapper_QPoint::__eq__(QPoint* theWrappedObject, const QPoint&  p2)
 {
   return ( (*theWrappedObject)== p2);
+}
+
+void PythonQtWrapper_QPoint::readFrom(QPoint* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 >>  (*theWrappedObject);
 }
 
 void PythonQtWrapper_QPoint::setX(QPoint* theWrappedObject, int  x)
@@ -1705,9 +2154,19 @@ QPointF*  PythonQtWrapper_QPointF::__idiv__(QPointF* theWrappedObject, qreal  c)
   return &( (*theWrappedObject)/= c);
 }
 
+void PythonQtWrapper_QPointF::writeTo(QPointF* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 <<  (*theWrappedObject);
+}
+
 bool  PythonQtWrapper_QPointF::__eq__(QPointF* theWrappedObject, const QPointF&  p2)
 {
   return ( (*theWrappedObject)== p2);
+}
+
+void PythonQtWrapper_QPointF::readFrom(QPointF* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 >>  (*theWrappedObject);
 }
 
 void PythonQtWrapper_QPointF::setX(QPointF* theWrappedObject, qreal  x)
@@ -1905,9 +2364,39 @@ QRect  PythonQtWrapper_QRect::normalized(QRect* theWrappedObject) const
   return ( theWrappedObject->normalized());
 }
 
+QRect  PythonQtWrapper_QRect::__and__(QRect* theWrappedObject, const QRect&  r) const
+{
+  return ( (*theWrappedObject)& r);
+}
+
+QRect*  PythonQtWrapper_QRect::__iand__(QRect* theWrappedObject, const QRect&  r)
+{
+  return &( (*theWrappedObject)&= r);
+}
+
+void PythonQtWrapper_QRect::writeTo(QRect* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 <<  (*theWrappedObject);
+}
+
 bool  PythonQtWrapper_QRect::__eq__(QRect* theWrappedObject, const QRect&  arg__2)
 {
   return ( (*theWrappedObject)== arg__2);
+}
+
+void PythonQtWrapper_QRect::readFrom(QRect* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 >>  (*theWrappedObject);
+}
+
+QRect  PythonQtWrapper_QRect::__or__(QRect* theWrappedObject, const QRect&  r) const
+{
+  return ( (*theWrappedObject)| r);
+}
+
+QRect*  PythonQtWrapper_QRect::__ior__(QRect* theWrappedObject, const QRect&  r)
+{
+  return &( (*theWrappedObject)|= r);
 }
 
 int  PythonQtWrapper_QRect::right(QRect* theWrappedObject) const
@@ -2124,6 +2613,16 @@ bool  PythonQtWrapper_QRectF::contains(QRectF* theWrappedObject, qreal  x, qreal
   return ( theWrappedObject->contains(x, y));
 }
 
+void PythonQtWrapper_QRectF::getCoords(QRectF* theWrappedObject, qreal*  x1, qreal*  y1, qreal*  x2, qreal*  y2) const
+{
+  ( theWrappedObject->getCoords(x1, y1, x2, y2));
+}
+
+void PythonQtWrapper_QRectF::getRect(QRectF* theWrappedObject, qreal*  x, qreal*  y, qreal*  w, qreal*  h) const
+{
+  ( theWrappedObject->getRect(x, y, w, h));
+}
+
 qreal  PythonQtWrapper_QRectF::height(QRectF* theWrappedObject) const
 {
   return ( theWrappedObject->height());
@@ -2219,9 +2718,39 @@ QRectF  PythonQtWrapper_QRectF::normalized(QRectF* theWrappedObject) const
   return ( theWrappedObject->normalized());
 }
 
+QRectF  PythonQtWrapper_QRectF::__and__(QRectF* theWrappedObject, const QRectF&  r) const
+{
+  return ( (*theWrappedObject)& r);
+}
+
+QRectF*  PythonQtWrapper_QRectF::__iand__(QRectF* theWrappedObject, const QRectF&  r)
+{
+  return &( (*theWrappedObject)&= r);
+}
+
+void PythonQtWrapper_QRectF::writeTo(QRectF* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 <<  (*theWrappedObject);
+}
+
 bool  PythonQtWrapper_QRectF::__eq__(QRectF* theWrappedObject, const QRectF&  arg__2)
 {
   return ( (*theWrappedObject)== arg__2);
+}
+
+void PythonQtWrapper_QRectF::readFrom(QRectF* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 >>  (*theWrappedObject);
+}
+
+QRectF  PythonQtWrapper_QRectF::__or__(QRectF* theWrappedObject, const QRectF&  r) const
+{
+  return ( (*theWrappedObject)| r);
+}
+
+QRectF*  PythonQtWrapper_QRectF::__ior__(QRectF* theWrappedObject, const QRectF&  r)
+{
+  return &( (*theWrappedObject)|= r);
 }
 
 qreal  PythonQtWrapper_QRectF::right(QRectF* theWrappedObject) const
@@ -2395,7 +2924,7 @@ QRegExp* PythonQtWrapper_QRegExp::new_QRegExp(const QString&  pattern, Qt::CaseS
 { 
 return new QRegExp(pattern, cs, syntax); }
 
-QString  PythonQtWrapper_QRegExp::cap(QRegExp* theWrappedObject, int  nth) const
+QString  PythonQtWrapper_QRegExp::cap(QRegExp* theWrappedObject, int  nth)
 {
   return ( theWrappedObject->cap(nth));
 }
@@ -2405,7 +2934,7 @@ int  PythonQtWrapper_QRegExp::captureCount(QRegExp* theWrappedObject) const
   return ( theWrappedObject->captureCount());
 }
 
-QStringList  PythonQtWrapper_QRegExp::capturedTexts(QRegExp* theWrappedObject) const
+QStringList  PythonQtWrapper_QRegExp::capturedTexts(QRegExp* theWrappedObject)
 {
   return ( theWrappedObject->capturedTexts());
 }
@@ -2415,7 +2944,7 @@ Qt::CaseSensitivity  PythonQtWrapper_QRegExp::caseSensitivity(QRegExp* theWrappe
   return ( theWrappedObject->caseSensitivity());
 }
 
-QString  PythonQtWrapper_QRegExp::errorString(QRegExp* theWrappedObject) const
+QString  PythonQtWrapper_QRegExp::errorString(QRegExp* theWrappedObject)
 {
   return ( theWrappedObject->errorString());
 }
@@ -2465,9 +2994,19 @@ bool  PythonQtWrapper_QRegExp::__ne__(QRegExp* theWrappedObject, const QRegExp& 
   return ( (*theWrappedObject)!= rx);
 }
 
+void PythonQtWrapper_QRegExp::writeTo(QRegExp* theWrappedObject, QDataStream&  out)
+{
+  out <<  (*theWrappedObject);
+}
+
 bool  PythonQtWrapper_QRegExp::__eq__(QRegExp* theWrappedObject, const QRegExp&  rx) const
 {
   return ( (*theWrappedObject)== rx);
+}
+
+void PythonQtWrapper_QRegExp::readFrom(QRegExp* theWrappedObject, QDataStream&  in)
+{
+  in >>  (*theWrappedObject);
 }
 
 QString  PythonQtWrapper_QRegExp::pattern(QRegExp* theWrappedObject) const
@@ -2480,7 +3019,7 @@ QRegExp::PatternSyntax  PythonQtWrapper_QRegExp::patternSyntax(QRegExp* theWrapp
   return ( theWrappedObject->patternSyntax());
 }
 
-int  PythonQtWrapper_QRegExp::pos(QRegExp* theWrappedObject, int  nth) const
+int  PythonQtWrapper_QRegExp::pos(QRegExp* theWrappedObject, int  nth)
 {
   return ( theWrappedObject->pos(nth));
 }
@@ -2597,9 +3136,19 @@ QSize*  PythonQtWrapper_QSize::__idiv__(QSize* theWrappedObject, qreal  c)
   return &( (*theWrappedObject)/= c);
 }
 
+void PythonQtWrapper_QSize::writeTo(QSize* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 <<  (*theWrappedObject);
+}
+
 bool  PythonQtWrapper_QSize::__eq__(QSize* theWrappedObject, const QSize&  s2)
 {
   return ( (*theWrappedObject)== s2);
+}
+
+void PythonQtWrapper_QSize::readFrom(QSize* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 >>  (*theWrappedObject);
 }
 
 void PythonQtWrapper_QSize::scale(QSize* theWrappedObject, const QSize&  s, Qt::AspectRatioMode  mode)
@@ -2738,9 +3287,19 @@ QSizeF*  PythonQtWrapper_QSizeF::__idiv__(QSizeF* theWrappedObject, qreal  c)
   return &( (*theWrappedObject)/= c);
 }
 
+void PythonQtWrapper_QSizeF::writeTo(QSizeF* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 <<  (*theWrappedObject);
+}
+
 bool  PythonQtWrapper_QSizeF::__eq__(QSizeF* theWrappedObject, const QSizeF&  s2)
 {
   return ( (*theWrappedObject)== s2);
+}
+
+void PythonQtWrapper_QSizeF::readFrom(QSizeF* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 >>  (*theWrappedObject);
 }
 
 void PythonQtWrapper_QSizeF::scale(QSizeF* theWrappedObject, const QSizeF&  s, Qt::AspectRatioMode  mode)
@@ -2885,6 +3444,11 @@ bool  PythonQtWrapper_QTime::__lt__(QTime* theWrappedObject, const QTime&  other
   return ( (*theWrappedObject)< other);
 }
 
+void PythonQtWrapper_QTime::writeTo(QTime* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 <<  (*theWrappedObject);
+}
+
 bool  PythonQtWrapper_QTime::__le__(QTime* theWrappedObject, const QTime&  other) const
 {
   return ( (*theWrappedObject)<= other);
@@ -2903,6 +3467,11 @@ bool  PythonQtWrapper_QTime::__gt__(QTime* theWrappedObject, const QTime&  other
 bool  PythonQtWrapper_QTime::__ge__(QTime* theWrappedObject, const QTime&  other) const
 {
   return ( (*theWrappedObject)>= other);
+}
+
+void PythonQtWrapper_QTime::readFrom(QTime* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 >>  (*theWrappedObject);
 }
 
 int  PythonQtWrapper_QTime::restart(QTime* theWrappedObject)
@@ -2955,6 +3524,11 @@ QUrl* PythonQtWrapper_QUrl::new_QUrl(const QUrl&  copy)
 { 
 return new QUrl(copy); }
 
+QString  PythonQtWrapper_QUrl::authority(QUrl* theWrappedObject, QUrl::ComponentFormattingOptions  options) const
+{
+  return ( theWrappedObject->authority(options));
+}
+
 void PythonQtWrapper_QUrl::clear(QUrl* theWrappedObject)
 {
   ( theWrappedObject->clear());
@@ -2963,6 +3537,11 @@ void PythonQtWrapper_QUrl::clear(QUrl* theWrappedObject)
 QString  PythonQtWrapper_QUrl::errorString(QUrl* theWrappedObject) const
 {
   return ( theWrappedObject->errorString());
+}
+
+QString  PythonQtWrapper_QUrl::fragment(QUrl* theWrappedObject, QUrl::ComponentFormattingOptions  options) const
+{
+  return ( theWrappedObject->fragment(options));
 }
 
 QString  PythonQtWrapper_QUrl::static_QUrl_fromAce(const QByteArray&  arg__1)
@@ -2998,6 +3577,11 @@ bool  PythonQtWrapper_QUrl::hasFragment(QUrl* theWrappedObject) const
 bool  PythonQtWrapper_QUrl::hasQuery(QUrl* theWrappedObject) const
 {
   return ( theWrappedObject->hasQuery());
+}
+
+QString  PythonQtWrapper_QUrl::host(QUrl* theWrappedObject, QUrl::ComponentFormattingOptions  arg__1) const
+{
+  return ( theWrappedObject->host(arg__1));
 }
 
 QStringList  PythonQtWrapper_QUrl::static_QUrl_idnWhitelist()
@@ -3040,14 +3624,39 @@ bool  PythonQtWrapper_QUrl::__lt__(QUrl* theWrappedObject, const QUrl&  url) con
   return ( (*theWrappedObject)< url);
 }
 
+void PythonQtWrapper_QUrl::writeTo(QUrl* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 <<  (*theWrappedObject);
+}
+
 bool  PythonQtWrapper_QUrl::__eq__(QUrl* theWrappedObject, const QUrl&  url) const
 {
   return ( (*theWrappedObject)== url);
 }
 
+void PythonQtWrapper_QUrl::readFrom(QUrl* theWrappedObject, QDataStream&  arg__1)
+{
+  arg__1 >>  (*theWrappedObject);
+}
+
+QString  PythonQtWrapper_QUrl::password(QUrl* theWrappedObject, QUrl::ComponentFormattingOptions  arg__1) const
+{
+  return ( theWrappedObject->password(arg__1));
+}
+
+QString  PythonQtWrapper_QUrl::path(QUrl* theWrappedObject, QUrl::ComponentFormattingOptions  options) const
+{
+  return ( theWrappedObject->path(options));
+}
+
 int  PythonQtWrapper_QUrl::port(QUrl* theWrappedObject, int  defaultPort) const
 {
   return ( theWrappedObject->port(defaultPort));
+}
+
+QString  PythonQtWrapper_QUrl::query(QUrl* theWrappedObject, QUrl::ComponentFormattingOptions  arg__1) const
+{
+  return ( theWrappedObject->query(arg__1));
 }
 
 QUrl  PythonQtWrapper_QUrl::resolved(QUrl* theWrappedObject, const QUrl&  relative) const
@@ -3100,6 +3709,11 @@ void PythonQtWrapper_QUrl::setQuery(QUrl* theWrappedObject, const QString&  quer
   ( theWrappedObject->setQuery(query, mode));
 }
 
+void PythonQtWrapper_QUrl::setQuery(QUrl* theWrappedObject, const QUrlQuery&  query)
+{
+  ( theWrappedObject->setQuery(query));
+}
+
 void PythonQtWrapper_QUrl::setScheme(QUrl* theWrappedObject, const QString&  scheme)
 {
   ( theWrappedObject->setScheme(scheme));
@@ -3130,6 +3744,16 @@ QByteArray  PythonQtWrapper_QUrl::static_QUrl_toAce(const QString&  arg__1)
   return (QUrl::toAce(arg__1));
 }
 
+QString  PythonQtWrapper_QUrl::toDisplayString(QUrl* theWrappedObject, QUrl::FormattingOptions  options) const
+{
+  return ( theWrappedObject->toDisplayString(options));
+}
+
+QByteArray  PythonQtWrapper_QUrl::toEncoded(QUrl* theWrappedObject, QUrl::FormattingOptions  options) const
+{
+  return ( theWrappedObject->toEncoded(options));
+}
+
 QString  PythonQtWrapper_QUrl::toLocalFile(QUrl* theWrappedObject) const
 {
   return ( theWrappedObject->toLocalFile());
@@ -3140,13 +3764,47 @@ QByteArray  PythonQtWrapper_QUrl::static_QUrl_toPercentEncoding(const QString&  
   return (QUrl::toPercentEncoding(arg__1, exclude, include));
 }
 
-QString PythonQtWrapper_QUrl::py_toString(QUrl* obj) {
-  QString result;
-  QDebug d(&result);
-  d << *obj;
-  return result;
+QString  PythonQtWrapper_QUrl::toString(QUrl* theWrappedObject, QUrl::FormattingOptions  options) const
+{
+  return ( theWrappedObject->toString(options));
 }
 
+QString  PythonQtWrapper_QUrl::topLevelDomain(QUrl* theWrappedObject, QUrl::ComponentFormattingOptions  options) const
+{
+  return ( theWrappedObject->topLevelDomain(options));
+}
 
+QString  PythonQtWrapper_QUrl::url(QUrl* theWrappedObject, QUrl::FormattingOptions  options) const
+{
+  return ( theWrappedObject->url(options));
+}
+
+QString  PythonQtWrapper_QUrl::userInfo(QUrl* theWrappedObject, QUrl::ComponentFormattingOptions  options) const
+{
+  return ( theWrappedObject->userInfo(options));
+}
+
+QString  PythonQtWrapper_QUrl::userName(QUrl* theWrappedObject, QUrl::ComponentFormattingOptions  options) const
+{
+  return ( theWrappedObject->userName(options));
+}
+
+QString PythonQtWrapper_QUrl::py_toString(QUrl* obj) { return obj->toString(); }
+
+
+QTextCodec*  PythonQtWrapper_Qt::static_Qt_codecForHtml(const QByteArray&  ba)
+{
+  return (Qt::codecForHtml(ba));
+}
+
+QString  PythonQtWrapper_Qt::static_Qt_convertFromPlainText(const QString&  plain, Qt::WhiteSpaceMode  mode)
+{
+  return (Qt::convertFromPlainText(plain, mode));
+}
+
+bool  PythonQtWrapper_Qt::static_Qt_mightBeRichText(const QString&  arg__1)
+{
+  return (Qt::mightBeRichText(arg__1));
+}
 
 

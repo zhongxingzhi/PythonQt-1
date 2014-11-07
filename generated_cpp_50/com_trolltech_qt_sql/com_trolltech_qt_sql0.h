@@ -12,7 +12,9 @@
 #include <qabstractitemmodel.h>
 #include <qbytearray.h>
 #include <qcoreevent.h>
+#include <qdatastream.h>
 #include <qlist.h>
+#include <qmetaobject.h>
 #include <qmimedata.h>
 #include <qobject.h>
 #include <qsize.h>
@@ -36,14 +38,14 @@
 class PythonQtWrapper_QSql : public QObject
 { Q_OBJECT
 public:
-Q_ENUMS(ParamTypeFlag Location NumericalPrecisionPolicy TableType )
+Q_ENUMS(Location NumericalPrecisionPolicy ParamTypeFlag TableType )
 Q_FLAGS(ParamType )
-enum ParamTypeFlag{
-  In = QSql::In,   Out = QSql::Out,   InOut = QSql::InOut,   Binary = QSql::Binary};
 enum Location{
   BeforeFirstRow = QSql::BeforeFirstRow,   AfterLastRow = QSql::AfterLastRow};
 enum NumericalPrecisionPolicy{
   LowPrecisionInt32 = QSql::LowPrecisionInt32,   LowPrecisionInt64 = QSql::LowPrecisionInt64,   LowPrecisionDouble = QSql::LowPrecisionDouble,   HighPrecision = QSql::HighPrecision};
+enum ParamTypeFlag{
+  In = QSql::In,   Out = QSql::Out,   InOut = QSql::InOut,   Binary = QSql::Binary};
 enum TableType{
   Tables = QSql::Tables,   SystemTables = QSql::SystemTables,   Views = QSql::Views,   AllTables = QSql::AllTables};
 Q_DECLARE_FLAGS(ParamType, ParamTypeFlag)
@@ -75,47 +77,47 @@ public slots:
 QSqlDatabase* new_QSqlDatabase();
 QSqlDatabase* new_QSqlDatabase(const QSqlDatabase&  other);
 void delete_QSqlDatabase(QSqlDatabase* obj) { delete obj; } 
-    QSqlDatabase  static_QSqlDatabase_addDatabase(QSqlDriver*  driver, const QString&  connectionName = QLatin1String(QSqlDatabase::defaultConnection));
-    QSqlDatabase  static_QSqlDatabase_addDatabase(const QString&  type, const QString&  connectionName = QLatin1String(QSqlDatabase::defaultConnection));
-    QSqlDatabase  static_QSqlDatabase_cloneDatabase(const QSqlDatabase&  other, const QString&  connectionName);
-    void close(QSqlDatabase* theWrappedObject);
-    bool  commit(QSqlDatabase* theWrappedObject);
-    QString  connectOptions(QSqlDatabase* theWrappedObject) const;
-    QString  connectionName(QSqlDatabase* theWrappedObject) const;
-    QStringList  static_QSqlDatabase_connectionNames();
-    bool  static_QSqlDatabase_contains(const QString&  connectionName = QLatin1String(QSqlDatabase::defaultConnection));
-    QSqlDatabase  static_QSqlDatabase_database(const QString&  connectionName = QLatin1String(QSqlDatabase::defaultConnection), bool  open = true);
-    QString  databaseName(QSqlDatabase* theWrappedObject) const;
-    QSqlDriver*  driver(QSqlDatabase* theWrappedObject) const;
-    QString  driverName(QSqlDatabase* theWrappedObject) const;
-    QStringList  static_QSqlDatabase_drivers();
-    QSqlQuery  exec(QSqlDatabase* theWrappedObject, const QString&  query = QString()) const;
-    QString  hostName(QSqlDatabase* theWrappedObject) const;
-    bool  static_QSqlDatabase_isDriverAvailable(const QString&  name);
-    bool  isOpen(QSqlDatabase* theWrappedObject) const;
-    bool  isOpenError(QSqlDatabase* theWrappedObject) const;
-    bool  isValid(QSqlDatabase* theWrappedObject) const;
-    QSqlError  lastError(QSqlDatabase* theWrappedObject) const;
-    QSql::NumericalPrecisionPolicy  numericalPrecisionPolicy(QSqlDatabase* theWrappedObject) const;
-    bool  open(QSqlDatabase* theWrappedObject);
-    bool  open(QSqlDatabase* theWrappedObject, const QString&  user, const QString&  password);
-    QString  password(QSqlDatabase* theWrappedObject) const;
-    int  port(QSqlDatabase* theWrappedObject) const;
-    QSqlIndex  primaryIndex(QSqlDatabase* theWrappedObject, const QString&  tablename) const;
-    QSqlRecord  record(QSqlDatabase* theWrappedObject, const QString&  tablename) const;
-    void static_QSqlDatabase_registerSqlDriver(const QString&  name, QSqlDriverCreatorBase*  creator);
-    void static_QSqlDatabase_removeDatabase(const QString&  connectionName);
-    bool  rollback(QSqlDatabase* theWrappedObject);
-    void setConnectOptions(QSqlDatabase* theWrappedObject, const QString&  options = QString());
-    void setDatabaseName(QSqlDatabase* theWrappedObject, const QString&  name);
-    void setHostName(QSqlDatabase* theWrappedObject, const QString&  host);
-    void setNumericalPrecisionPolicy(QSqlDatabase* theWrappedObject, QSql::NumericalPrecisionPolicy  precisionPolicy);
-    void setPassword(QSqlDatabase* theWrappedObject, const QString&  password);
-    void setPort(QSqlDatabase* theWrappedObject, int  p);
-    void setUserName(QSqlDatabase* theWrappedObject, const QString&  name);
-    QStringList  tables(QSqlDatabase* theWrappedObject, QSql::TableType  type = QSql::Tables) const;
-    bool  transaction(QSqlDatabase* theWrappedObject);
-    QString  userName(QSqlDatabase* theWrappedObject) const;
+   QSqlDatabase  static_QSqlDatabase_addDatabase(QSqlDriver*  driver, const QString&  connectionName = QLatin1String(QSqlDatabase::defaultConnection));
+   QSqlDatabase  static_QSqlDatabase_addDatabase(const QString&  type, const QString&  connectionName = QLatin1String(QSqlDatabase::defaultConnection));
+   QSqlDatabase  static_QSqlDatabase_cloneDatabase(const QSqlDatabase&  other, const QString&  connectionName);
+   void close(QSqlDatabase* theWrappedObject);
+   bool  commit(QSqlDatabase* theWrappedObject);
+   QString  connectOptions(QSqlDatabase* theWrappedObject) const;
+   QString  connectionName(QSqlDatabase* theWrappedObject) const;
+   QStringList  static_QSqlDatabase_connectionNames();
+   bool  static_QSqlDatabase_contains(const QString&  connectionName = QLatin1String(QSqlDatabase::defaultConnection));
+   QSqlDatabase  static_QSqlDatabase_database(const QString&  connectionName = QLatin1String(QSqlDatabase::defaultConnection), bool  open = true);
+   QString  databaseName(QSqlDatabase* theWrappedObject) const;
+   QSqlDriver*  driver(QSqlDatabase* theWrappedObject) const;
+   QString  driverName(QSqlDatabase* theWrappedObject) const;
+   QStringList  static_QSqlDatabase_drivers();
+   QSqlQuery  exec(QSqlDatabase* theWrappedObject, const QString&  query = QString()) const;
+   QString  hostName(QSqlDatabase* theWrappedObject) const;
+   bool  static_QSqlDatabase_isDriverAvailable(const QString&  name);
+   bool  isOpen(QSqlDatabase* theWrappedObject) const;
+   bool  isOpenError(QSqlDatabase* theWrappedObject) const;
+   bool  isValid(QSqlDatabase* theWrappedObject) const;
+   QSqlError  lastError(QSqlDatabase* theWrappedObject) const;
+   QSql::NumericalPrecisionPolicy  numericalPrecisionPolicy(QSqlDatabase* theWrappedObject) const;
+   bool  open(QSqlDatabase* theWrappedObject);
+   bool  open(QSqlDatabase* theWrappedObject, const QString&  user, const QString&  password);
+   QString  password(QSqlDatabase* theWrappedObject) const;
+   int  port(QSqlDatabase* theWrappedObject) const;
+   QSqlIndex  primaryIndex(QSqlDatabase* theWrappedObject, const QString&  tablename) const;
+   QSqlRecord  record(QSqlDatabase* theWrappedObject, const QString&  tablename) const;
+   void static_QSqlDatabase_registerSqlDriver(const QString&  name, QSqlDriverCreatorBase*  creator);
+   void static_QSqlDatabase_removeDatabase(const QString&  connectionName);
+   bool  rollback(QSqlDatabase* theWrappedObject);
+   void setConnectOptions(QSqlDatabase* theWrappedObject, const QString&  options = QString());
+   void setDatabaseName(QSqlDatabase* theWrappedObject, const QString&  name);
+   void setHostName(QSqlDatabase* theWrappedObject, const QString&  host);
+   void setNumericalPrecisionPolicy(QSqlDatabase* theWrappedObject, QSql::NumericalPrecisionPolicy  precisionPolicy);
+   void setPassword(QSqlDatabase* theWrappedObject, const QString&  password);
+   void setPort(QSqlDatabase* theWrappedObject, int  p);
+   void setUserName(QSqlDatabase* theWrappedObject, const QString&  name);
+   QStringList  tables(QSqlDatabase* theWrappedObject, QSql::TableType  type = QSql::Tables) const;
+   bool  transaction(QSqlDatabase* theWrappedObject);
+   QString  userName(QSqlDatabase* theWrappedObject) const;
     QString py_toString(QSqlDatabase*);
 };
 
@@ -190,40 +192,42 @@ inline bool  promoted_unsubscribeFromNotification(const QString&  name) { return
 class PythonQtWrapper_QSqlDriver : public QObject
 { Q_OBJECT
 public:
-Q_ENUMS(IdentifierType DriverFeature StatementType )
-enum IdentifierType{
-  FieldName = QSqlDriver::FieldName,   TableName = QSqlDriver::TableName};
+Q_ENUMS(DriverFeature IdentifierType NotificationSource StatementType )
 enum DriverFeature{
   Transactions = QSqlDriver::Transactions,   QuerySize = QSqlDriver::QuerySize,   BLOB = QSqlDriver::BLOB,   Unicode = QSqlDriver::Unicode,   PreparedQueries = QSqlDriver::PreparedQueries,   NamedPlaceholders = QSqlDriver::NamedPlaceholders,   PositionalPlaceholders = QSqlDriver::PositionalPlaceholders,   LastInsertId = QSqlDriver::LastInsertId,   BatchOperations = QSqlDriver::BatchOperations,   SimpleLocking = QSqlDriver::SimpleLocking,   LowPrecisionNumbers = QSqlDriver::LowPrecisionNumbers,   EventNotifications = QSqlDriver::EventNotifications,   FinishQuery = QSqlDriver::FinishQuery,   MultipleResultSets = QSqlDriver::MultipleResultSets,   CancelQuery = QSqlDriver::CancelQuery};
+enum IdentifierType{
+  FieldName = QSqlDriver::FieldName,   TableName = QSqlDriver::TableName};
+enum NotificationSource{
+  UnknownSource = QSqlDriver::UnknownSource,   SelfSource = QSqlDriver::SelfSource,   OtherSource = QSqlDriver::OtherSource};
 enum StatementType{
   WhereStatement = QSqlDriver::WhereStatement,   SelectStatement = QSqlDriver::SelectStatement,   UpdateStatement = QSqlDriver::UpdateStatement,   InsertStatement = QSqlDriver::InsertStatement,   DeleteStatement = QSqlDriver::DeleteStatement};
 public slots:
 QSqlDriver* new_QSqlDriver(QObject*  parent = 0);
 void delete_QSqlDriver(QSqlDriver* obj) { delete obj; } 
-    bool  beginTransaction(QSqlDriver* theWrappedObject);
-    bool  cancelQuery(QSqlDriver* theWrappedObject);
-    bool  commitTransaction(QSqlDriver* theWrappedObject);
-    QString  escapeIdentifier(QSqlDriver* theWrappedObject, const QString&  identifier, QSqlDriver::IdentifierType  type) const;
-    QString  formatValue(QSqlDriver* theWrappedObject, const QSqlField&  field, bool  trimStrings = false) const;
-    QVariant  handle(QSqlDriver* theWrappedObject) const;
-    bool  isIdentifierEscaped(QSqlDriver* theWrappedObject, const QString&  identifier, QSqlDriver::IdentifierType  type) const;
-    bool  isOpen(QSqlDriver* theWrappedObject) const;
-    bool  isOpenError(QSqlDriver* theWrappedObject) const;
-    QSqlError  lastError(QSqlDriver* theWrappedObject) const;
-    QSql::NumericalPrecisionPolicy  numericalPrecisionPolicy(QSqlDriver* theWrappedObject) const;
-    QSqlIndex  primaryIndex(QSqlDriver* theWrappedObject, const QString&  tableName) const;
-    QSqlRecord  record(QSqlDriver* theWrappedObject, const QString&  tableName) const;
-    bool  rollbackTransaction(QSqlDriver* theWrappedObject);
-    void setLastError(QSqlDriver* theWrappedObject, const QSqlError&  e);
-    void setNumericalPrecisionPolicy(QSqlDriver* theWrappedObject, QSql::NumericalPrecisionPolicy  precisionPolicy);
-    void setOpen(QSqlDriver* theWrappedObject, bool  o);
-    void setOpenError(QSqlDriver* theWrappedObject, bool  e);
-    QString  sqlStatement(QSqlDriver* theWrappedObject, QSqlDriver::StatementType  type, const QString&  tableName, const QSqlRecord&  rec, bool  preparedStatement) const;
-    QString  stripDelimiters(QSqlDriver* theWrappedObject, const QString&  identifier, QSqlDriver::IdentifierType  type) const;
-    bool  subscribeToNotification(QSqlDriver* theWrappedObject, const QString&  name);
-    QStringList  subscribedToNotifications(QSqlDriver* theWrappedObject) const;
-    QStringList  tables(QSqlDriver* theWrappedObject, QSql::TableType  tableType) const;
-    bool  unsubscribeFromNotification(QSqlDriver* theWrappedObject, const QString&  name);
+   bool  beginTransaction(QSqlDriver* theWrappedObject);
+   bool  cancelQuery(QSqlDriver* theWrappedObject);
+   bool  commitTransaction(QSqlDriver* theWrappedObject);
+   QString  escapeIdentifier(QSqlDriver* theWrappedObject, const QString&  identifier, QSqlDriver::IdentifierType  type) const;
+   QString  formatValue(QSqlDriver* theWrappedObject, const QSqlField&  field, bool  trimStrings = false) const;
+   QVariant  handle(QSqlDriver* theWrappedObject) const;
+   bool  isIdentifierEscaped(QSqlDriver* theWrappedObject, const QString&  identifier, QSqlDriver::IdentifierType  type) const;
+   bool  isOpen(QSqlDriver* theWrappedObject) const;
+   bool  isOpenError(QSqlDriver* theWrappedObject) const;
+   QSqlError  lastError(QSqlDriver* theWrappedObject) const;
+   QSql::NumericalPrecisionPolicy  numericalPrecisionPolicy(QSqlDriver* theWrappedObject) const;
+   QSqlIndex  primaryIndex(QSqlDriver* theWrappedObject, const QString&  tableName) const;
+   QSqlRecord  record(QSqlDriver* theWrappedObject, const QString&  tableName) const;
+   bool  rollbackTransaction(QSqlDriver* theWrappedObject);
+   void setLastError(QSqlDriver* theWrappedObject, const QSqlError&  e);
+   void setNumericalPrecisionPolicy(QSqlDriver* theWrappedObject, QSql::NumericalPrecisionPolicy  precisionPolicy);
+   void setOpen(QSqlDriver* theWrappedObject, bool  o);
+   void setOpenError(QSqlDriver* theWrappedObject, bool  e);
+   QString  sqlStatement(QSqlDriver* theWrappedObject, QSqlDriver::StatementType  type, const QString&  tableName, const QSqlRecord&  rec, bool  preparedStatement) const;
+   QString  stripDelimiters(QSqlDriver* theWrappedObject, const QString&  identifier, QSqlDriver::IdentifierType  type) const;
+   bool  subscribeToNotification(QSqlDriver* theWrappedObject, const QString&  name);
+   QStringList  subscribedToNotifications(QSqlDriver* theWrappedObject) const;
+   QStringList  tables(QSqlDriver* theWrappedObject, QSql::TableType  tableType) const;
+   bool  unsubscribeFromNotification(QSqlDriver* theWrappedObject, const QString&  name);
 };
 
 
@@ -264,18 +268,18 @@ public slots:
 QSqlError* new_QSqlError(const QSqlError&  other);
 QSqlError* new_QSqlError(const QString&  driverText = QString(), const QString&  databaseText = QString(), QSqlError::ErrorType  type = QSqlError::NoError, int  number = -1);
 void delete_QSqlError(QSqlError* obj) { delete obj; } 
-    QString  databaseText(QSqlError* theWrappedObject) const;
-    QString  driverText(QSqlError* theWrappedObject) const;
-    bool  isValid(QSqlError* theWrappedObject) const;
-    int  number(QSqlError* theWrappedObject) const;
-    bool  __ne__(QSqlError* theWrappedObject, const QSqlError&  other) const;
-    bool  __eq__(QSqlError* theWrappedObject, const QSqlError&  other) const;
-    void setDatabaseText(QSqlError* theWrappedObject, const QString&  databaseText);
-    void setDriverText(QSqlError* theWrappedObject, const QString&  driverText);
-    void setNumber(QSqlError* theWrappedObject, int  number);
-    void setType(QSqlError* theWrappedObject, QSqlError::ErrorType  type);
-    QString  text(QSqlError* theWrappedObject) const;
-    QSqlError::ErrorType  type(QSqlError* theWrappedObject) const;
+   QString  databaseText(QSqlError* theWrappedObject) const;
+   QString  driverText(QSqlError* theWrappedObject) const;
+   bool  isValid(QSqlError* theWrappedObject) const;
+   int  number(QSqlError* theWrappedObject) const;
+   bool  __ne__(QSqlError* theWrappedObject, const QSqlError&  other) const;
+   bool  __eq__(QSqlError* theWrappedObject, const QSqlError&  other) const;
+   void setDatabaseText(QSqlError* theWrappedObject, const QString&  databaseText);
+   void setDriverText(QSqlError* theWrappedObject, const QString&  driverText);
+   void setNumber(QSqlError* theWrappedObject, int  number);
+   void setType(QSqlError* theWrappedObject, QSqlError::ErrorType  type);
+   QString  text(QSqlError* theWrappedObject) const;
+   QSqlError::ErrorType  type(QSqlError* theWrappedObject) const;
     QString py_toString(QSqlError*);
 };
 
@@ -293,34 +297,34 @@ public slots:
 QSqlField* new_QSqlField(const QSqlField&  other);
 QSqlField* new_QSqlField(const QString&  fieldName = QString(), QVariant::Type  type = QVariant::Invalid);
 void delete_QSqlField(QSqlField* obj) { delete obj; } 
-    void clear(QSqlField* theWrappedObject);
-    QVariant  defaultValue(QSqlField* theWrappedObject) const;
-    bool  isAutoValue(QSqlField* theWrappedObject) const;
-    bool  isGenerated(QSqlField* theWrappedObject) const;
-    bool  isNull(QSqlField* theWrappedObject) const;
-    bool  isReadOnly(QSqlField* theWrappedObject) const;
-    bool  isValid(QSqlField* theWrappedObject) const;
-    int  length(QSqlField* theWrappedObject) const;
-    QString  name(QSqlField* theWrappedObject) const;
-    bool  __ne__(QSqlField* theWrappedObject, const QSqlField&  other) const;
-    bool  __eq__(QSqlField* theWrappedObject, const QSqlField&  other) const;
-    int  precision(QSqlField* theWrappedObject) const;
-    QSqlField::RequiredStatus  requiredStatus(QSqlField* theWrappedObject) const;
-    void setAutoValue(QSqlField* theWrappedObject, bool  autoVal);
-    void setDefaultValue(QSqlField* theWrappedObject, const QVariant&  value);
-    void setGenerated(QSqlField* theWrappedObject, bool  gen);
-    void setLength(QSqlField* theWrappedObject, int  fieldLength);
-    void setName(QSqlField* theWrappedObject, const QString&  name);
-    void setPrecision(QSqlField* theWrappedObject, int  precision);
-    void setReadOnly(QSqlField* theWrappedObject, bool  readOnly);
-    void setRequired(QSqlField* theWrappedObject, bool  required);
-    void setRequiredStatus(QSqlField* theWrappedObject, QSqlField::RequiredStatus  status);
-    void setSqlType(QSqlField* theWrappedObject, int  type);
-    void setType(QSqlField* theWrappedObject, QVariant::Type  type);
-    void setValue(QSqlField* theWrappedObject, const QVariant&  value);
-    QVariant::Type  type(QSqlField* theWrappedObject) const;
-    int  typeID(QSqlField* theWrappedObject) const;
-    QVariant  value(QSqlField* theWrappedObject) const;
+   void clear(QSqlField* theWrappedObject);
+   QVariant  defaultValue(QSqlField* theWrappedObject) const;
+   bool  isAutoValue(QSqlField* theWrappedObject) const;
+   bool  isGenerated(QSqlField* theWrappedObject) const;
+   bool  isNull(QSqlField* theWrappedObject) const;
+   bool  isReadOnly(QSqlField* theWrappedObject) const;
+   bool  isValid(QSqlField* theWrappedObject) const;
+   int  length(QSqlField* theWrappedObject) const;
+   QString  name(QSqlField* theWrappedObject) const;
+   bool  __ne__(QSqlField* theWrappedObject, const QSqlField&  other) const;
+   bool  __eq__(QSqlField* theWrappedObject, const QSqlField&  other) const;
+   int  precision(QSqlField* theWrappedObject) const;
+   QSqlField::RequiredStatus  requiredStatus(QSqlField* theWrappedObject) const;
+   void setAutoValue(QSqlField* theWrappedObject, bool  autoVal);
+   void setDefaultValue(QSqlField* theWrappedObject, const QVariant&  value);
+   void setGenerated(QSqlField* theWrappedObject, bool  gen);
+   void setLength(QSqlField* theWrappedObject, int  fieldLength);
+   void setName(QSqlField* theWrappedObject, const QString&  name);
+   void setPrecision(QSqlField* theWrappedObject, int  precision);
+   void setReadOnly(QSqlField* theWrappedObject, bool  readOnly);
+   void setRequired(QSqlField* theWrappedObject, bool  required);
+   void setRequiredStatus(QSqlField* theWrappedObject, QSqlField::RequiredStatus  status);
+   void setSqlType(QSqlField* theWrappedObject, int  type);
+   void setType(QSqlField* theWrappedObject, QVariant::Type  type);
+   void setValue(QSqlField* theWrappedObject, const QVariant&  value);
+   QVariant::Type  type(QSqlField* theWrappedObject) const;
+   int  typeID(QSqlField* theWrappedObject) const;
+   QVariant  value(QSqlField* theWrappedObject) const;
     QString py_toString(QSqlField*);
     bool __nonzero__(QSqlField* obj) { return !obj->isNull(); }
 };
@@ -336,14 +340,14 @@ public slots:
 QSqlIndex* new_QSqlIndex(const QSqlIndex&  other);
 QSqlIndex* new_QSqlIndex(const QString&  cursorName = QString(), const QString&  name = QString());
 void delete_QSqlIndex(QSqlIndex* obj) { delete obj; } 
-    void append(QSqlIndex* theWrappedObject, const QSqlField&  field);
-    void append(QSqlIndex* theWrappedObject, const QSqlField&  field, bool  desc);
-    QString  cursorName(QSqlIndex* theWrappedObject) const;
-    bool  isDescending(QSqlIndex* theWrappedObject, int  i) const;
-    QString  name(QSqlIndex* theWrappedObject) const;
-    void setCursorName(QSqlIndex* theWrappedObject, const QString&  cursorName);
-    void setDescending(QSqlIndex* theWrappedObject, int  i, bool  desc);
-    void setName(QSqlIndex* theWrappedObject, const QString&  name);
+   void append(QSqlIndex* theWrappedObject, const QSqlField&  field);
+   void append(QSqlIndex* theWrappedObject, const QSqlField&  field, bool  desc);
+   QString  cursorName(QSqlIndex* theWrappedObject) const;
+   bool  isDescending(QSqlIndex* theWrappedObject, int  i) const;
+   QString  name(QSqlIndex* theWrappedObject) const;
+   void setCursorName(QSqlIndex* theWrappedObject, const QString&  cursorName);
+   void setDescending(QSqlIndex* theWrappedObject, int  i, bool  desc);
+   void setName(QSqlIndex* theWrappedObject, const QString&  name);
 };
 
 
@@ -362,44 +366,44 @@ QSqlQuery* new_QSqlQuery(QSqlResult*  r);
 QSqlQuery* new_QSqlQuery(const QSqlQuery&  other);
 QSqlQuery* new_QSqlQuery(const QString&  query = QString(), QSqlDatabase  db = QSqlDatabase());
 void delete_QSqlQuery(QSqlQuery* obj) { delete obj; } 
-    void addBindValue(QSqlQuery* theWrappedObject, const QVariant&  val, QSql::ParamType  type = QSql::In);
-    int  at(QSqlQuery* theWrappedObject) const;
-    void bindValue(QSqlQuery* theWrappedObject, const QString&  placeholder, const QVariant&  val, QSql::ParamType  type = QSql::In);
-    void bindValue(QSqlQuery* theWrappedObject, int  pos, const QVariant&  val, QSql::ParamType  type = QSql::In);
-    QVariant  boundValue(QSqlQuery* theWrappedObject, const QString&  placeholder) const;
-    QVariant  boundValue(QSqlQuery* theWrappedObject, int  pos) const;
-    QMap<QString , QVariant >  boundValues(QSqlQuery* theWrappedObject) const;
-    void clear(QSqlQuery* theWrappedObject);
-    const QSqlDriver*  driver(QSqlQuery* theWrappedObject) const;
-    bool  exec(QSqlQuery* theWrappedObject);
-    bool  exec(QSqlQuery* theWrappedObject, const QString&  query);
-    bool  execBatch(QSqlQuery* theWrappedObject, QSqlQuery::BatchExecutionMode  mode = QSqlQuery::ValuesAsRows);
-    QString  executedQuery(QSqlQuery* theWrappedObject) const;
-    void finish(QSqlQuery* theWrappedObject);
-    bool  first(QSqlQuery* theWrappedObject);
-    bool  isActive(QSqlQuery* theWrappedObject) const;
-    bool  isForwardOnly(QSqlQuery* theWrappedObject) const;
-    bool  isNull(QSqlQuery* theWrappedObject, int  field) const;
-    bool  isSelect(QSqlQuery* theWrappedObject) const;
-    bool  isValid(QSqlQuery* theWrappedObject) const;
-    bool  last(QSqlQuery* theWrappedObject);
-    QSqlError  lastError(QSqlQuery* theWrappedObject) const;
-    QVariant  lastInsertId(QSqlQuery* theWrappedObject) const;
-    QString  lastQuery(QSqlQuery* theWrappedObject) const;
-    bool  next(QSqlQuery* theWrappedObject);
-    bool  nextResult(QSqlQuery* theWrappedObject);
-    int  numRowsAffected(QSqlQuery* theWrappedObject) const;
-    QSql::NumericalPrecisionPolicy  numericalPrecisionPolicy(QSqlQuery* theWrappedObject) const;
-    bool  prepare(QSqlQuery* theWrappedObject, const QString&  query);
-    bool  previous(QSqlQuery* theWrappedObject);
-    QSqlRecord  record(QSqlQuery* theWrappedObject) const;
-    const QSqlResult*  result(QSqlQuery* theWrappedObject) const;
-    bool  seek(QSqlQuery* theWrappedObject, int  i, bool  relative = false);
-    void setForwardOnly(QSqlQuery* theWrappedObject, bool  forward);
-    void setNumericalPrecisionPolicy(QSqlQuery* theWrappedObject, QSql::NumericalPrecisionPolicy  precisionPolicy);
-    int  size(QSqlQuery* theWrappedObject) const;
-    QVariant  value(QSqlQuery* theWrappedObject, const QString&  name) const;
-    QVariant  value(QSqlQuery* theWrappedObject, int  i) const;
+   void addBindValue(QSqlQuery* theWrappedObject, const QVariant&  val, QSql::ParamType  type = QSql::In);
+   int  at(QSqlQuery* theWrappedObject) const;
+   void bindValue(QSqlQuery* theWrappedObject, const QString&  placeholder, const QVariant&  val, QSql::ParamType  type = QSql::In);
+   void bindValue(QSqlQuery* theWrappedObject, int  pos, const QVariant&  val, QSql::ParamType  type = QSql::In);
+   QVariant  boundValue(QSqlQuery* theWrappedObject, const QString&  placeholder) const;
+   QVariant  boundValue(QSqlQuery* theWrappedObject, int  pos) const;
+   QMap<QString , QVariant >  boundValues(QSqlQuery* theWrappedObject) const;
+   void clear(QSqlQuery* theWrappedObject);
+   const QSqlDriver*  driver(QSqlQuery* theWrappedObject) const;
+   bool  exec(QSqlQuery* theWrappedObject);
+   bool  exec(QSqlQuery* theWrappedObject, const QString&  query);
+   bool  execBatch(QSqlQuery* theWrappedObject, QSqlQuery::BatchExecutionMode  mode = QSqlQuery::ValuesAsRows);
+   QString  executedQuery(QSqlQuery* theWrappedObject) const;
+   void finish(QSqlQuery* theWrappedObject);
+   bool  first(QSqlQuery* theWrappedObject);
+   bool  isActive(QSqlQuery* theWrappedObject) const;
+   bool  isForwardOnly(QSqlQuery* theWrappedObject) const;
+   bool  isNull(QSqlQuery* theWrappedObject, int  field) const;
+   bool  isSelect(QSqlQuery* theWrappedObject) const;
+   bool  isValid(QSqlQuery* theWrappedObject) const;
+   bool  last(QSqlQuery* theWrappedObject);
+   QSqlError  lastError(QSqlQuery* theWrappedObject) const;
+   QVariant  lastInsertId(QSqlQuery* theWrappedObject) const;
+   QString  lastQuery(QSqlQuery* theWrappedObject) const;
+   bool  next(QSqlQuery* theWrappedObject);
+   bool  nextResult(QSqlQuery* theWrappedObject);
+   int  numRowsAffected(QSqlQuery* theWrappedObject) const;
+   QSql::NumericalPrecisionPolicy  numericalPrecisionPolicy(QSqlQuery* theWrappedObject) const;
+   bool  prepare(QSqlQuery* theWrappedObject, const QString&  query);
+   bool  previous(QSqlQuery* theWrappedObject);
+   QSqlRecord  record(QSqlQuery* theWrappedObject) const;
+   const QSqlResult*  result(QSqlQuery* theWrappedObject) const;
+   bool  seek(QSqlQuery* theWrappedObject, int  i, bool  relative = false);
+   void setForwardOnly(QSqlQuery* theWrappedObject, bool  forward);
+   void setNumericalPrecisionPolicy(QSqlQuery* theWrappedObject, QSql::NumericalPrecisionPolicy  precisionPolicy);
+   int  size(QSqlQuery* theWrappedObject) const;
+   QVariant  value(QSqlQuery* theWrappedObject, const QString&  name) const;
+   QVariant  value(QSqlQuery* theWrappedObject, int  i) const;
 };
 
 
@@ -479,24 +483,24 @@ public:
 public slots:
 QSqlQueryModel* new_QSqlQueryModel(QObject*  parent = 0);
 void delete_QSqlQueryModel(QSqlQueryModel* obj) { delete obj; } 
-    bool  canFetchMore(QSqlQueryModel* theWrappedObject, const QModelIndex&  parent = QModelIndex()) const;
-    void clear(QSqlQueryModel* theWrappedObject);
-    int  columnCount(QSqlQueryModel* theWrappedObject, const QModelIndex&  parent = QModelIndex()) const;
-    QVariant  data(QSqlQueryModel* theWrappedObject, const QModelIndex&  item, int  role = Qt::DisplayRole) const;
-    void fetchMore(QSqlQueryModel* theWrappedObject, const QModelIndex&  parent = QModelIndex());
-    QVariant  headerData(QSqlQueryModel* theWrappedObject, int  section, Qt::Orientation  orientation, int  role = Qt::DisplayRole) const;
-    QModelIndex  indexInQuery(QSqlQueryModel* theWrappedObject, const QModelIndex&  item) const;
-    bool  insertColumns(QSqlQueryModel* theWrappedObject, int  column, int  count, const QModelIndex&  parent = QModelIndex());
-    QSqlError  lastError(QSqlQueryModel* theWrappedObject) const;
-    QSqlQuery  query(QSqlQueryModel* theWrappedObject) const;
-    void queryChange(QSqlQueryModel* theWrappedObject);
-    QSqlRecord  record(QSqlQueryModel* theWrappedObject) const;
-    QSqlRecord  record(QSqlQueryModel* theWrappedObject, int  row) const;
-    bool  removeColumns(QSqlQueryModel* theWrappedObject, int  column, int  count, const QModelIndex&  parent = QModelIndex());
-    int  rowCount(QSqlQueryModel* theWrappedObject, const QModelIndex&  parent = QModelIndex()) const;
-    bool  setHeaderData(QSqlQueryModel* theWrappedObject, int  section, Qt::Orientation  orientation, const QVariant&  value, int  role = Qt::EditRole);
-    void setQuery(QSqlQueryModel* theWrappedObject, const QSqlQuery&  query);
-    void setQuery(QSqlQueryModel* theWrappedObject, const QString&  query, const QSqlDatabase&  db = QSqlDatabase());
+   bool  canFetchMore(QSqlQueryModel* theWrappedObject, const QModelIndex&  parent = QModelIndex()) const;
+   void clear(QSqlQueryModel* theWrappedObject);
+   int  columnCount(QSqlQueryModel* theWrappedObject, const QModelIndex&  parent = QModelIndex()) const;
+   QVariant  data(QSqlQueryModel* theWrappedObject, const QModelIndex&  item, int  role = Qt::DisplayRole) const;
+   void fetchMore(QSqlQueryModel* theWrappedObject, const QModelIndex&  parent = QModelIndex());
+   QVariant  headerData(QSqlQueryModel* theWrappedObject, int  section, Qt::Orientation  orientation, int  role = Qt::DisplayRole) const;
+   QModelIndex  indexInQuery(QSqlQueryModel* theWrappedObject, const QModelIndex&  item) const;
+   bool  insertColumns(QSqlQueryModel* theWrappedObject, int  column, int  count, const QModelIndex&  parent = QModelIndex());
+   QSqlError  lastError(QSqlQueryModel* theWrappedObject) const;
+   QSqlQuery  query(QSqlQueryModel* theWrappedObject) const;
+   void queryChange(QSqlQueryModel* theWrappedObject);
+   QSqlRecord  record(QSqlQueryModel* theWrappedObject) const;
+   QSqlRecord  record(QSqlQueryModel* theWrappedObject, int  row) const;
+   bool  removeColumns(QSqlQueryModel* theWrappedObject, int  column, int  count, const QModelIndex&  parent = QModelIndex());
+   int  rowCount(QSqlQueryModel* theWrappedObject, const QModelIndex&  parent = QModelIndex()) const;
+   bool  setHeaderData(QSqlQueryModel* theWrappedObject, int  section, Qt::Orientation  orientation, const QVariant&  value, int  role = Qt::EditRole);
+   void setQuery(QSqlQueryModel* theWrappedObject, const QSqlQuery&  query);
+   void setQuery(QSqlQueryModel* theWrappedObject, const QString&  query, const QSqlDatabase&  db = QSqlDatabase());
 };
 
 
@@ -510,33 +514,33 @@ public slots:
 QSqlRecord* new_QSqlRecord();
 QSqlRecord* new_QSqlRecord(const QSqlRecord&  other);
 void delete_QSqlRecord(QSqlRecord* obj) { delete obj; } 
-    void append(QSqlRecord* theWrappedObject, const QSqlField&  field);
-    void clear(QSqlRecord* theWrappedObject);
-    void clearValues(QSqlRecord* theWrappedObject);
-    bool  contains(QSqlRecord* theWrappedObject, const QString&  name) const;
-    int  count(QSqlRecord* theWrappedObject) const;
-    QSqlField  field(QSqlRecord* theWrappedObject, const QString&  name) const;
-    QSqlField  field(QSqlRecord* theWrappedObject, int  i) const;
-    QString  fieldName(QSqlRecord* theWrappedObject, int  i) const;
-    int  indexOf(QSqlRecord* theWrappedObject, const QString&  name) const;
-    void insert(QSqlRecord* theWrappedObject, int  pos, const QSqlField&  field);
-    bool  isEmpty(QSqlRecord* theWrappedObject) const;
-    bool  isGenerated(QSqlRecord* theWrappedObject, const QString&  name) const;
-    bool  isGenerated(QSqlRecord* theWrappedObject, int  i) const;
-    bool  isNull(QSqlRecord* theWrappedObject, const QString&  name) const;
-    bool  isNull(QSqlRecord* theWrappedObject, int  i) const;
-    bool  __ne__(QSqlRecord* theWrappedObject, const QSqlRecord&  other) const;
-    bool  __eq__(QSqlRecord* theWrappedObject, const QSqlRecord&  other) const;
-    void remove(QSqlRecord* theWrappedObject, int  pos);
-    void replace(QSqlRecord* theWrappedObject, int  pos, const QSqlField&  field);
-    void setGenerated(QSqlRecord* theWrappedObject, const QString&  name, bool  generated);
-    void setGenerated(QSqlRecord* theWrappedObject, int  i, bool  generated);
-    void setNull(QSqlRecord* theWrappedObject, const QString&  name);
-    void setNull(QSqlRecord* theWrappedObject, int  i);
-    void setValue(QSqlRecord* theWrappedObject, const QString&  name, const QVariant&  val);
-    void setValue(QSqlRecord* theWrappedObject, int  i, const QVariant&  val);
-    QVariant  value(QSqlRecord* theWrappedObject, const QString&  name) const;
-    QVariant  value(QSqlRecord* theWrappedObject, int  i) const;
+   void append(QSqlRecord* theWrappedObject, const QSqlField&  field);
+   void clear(QSqlRecord* theWrappedObject);
+   void clearValues(QSqlRecord* theWrappedObject);
+   bool  contains(QSqlRecord* theWrappedObject, const QString&  name) const;
+   int  count(QSqlRecord* theWrappedObject) const;
+   QSqlField  field(QSqlRecord* theWrappedObject, const QString&  name) const;
+   QSqlField  field(QSqlRecord* theWrappedObject, int  i) const;
+   QString  fieldName(QSqlRecord* theWrappedObject, int  i) const;
+   int  indexOf(QSqlRecord* theWrappedObject, const QString&  name) const;
+   void insert(QSqlRecord* theWrappedObject, int  pos, const QSqlField&  field);
+   bool  isEmpty(QSqlRecord* theWrappedObject) const;
+   bool  isGenerated(QSqlRecord* theWrappedObject, const QString&  name) const;
+   bool  isGenerated(QSqlRecord* theWrappedObject, int  i) const;
+   bool  isNull(QSqlRecord* theWrappedObject, const QString&  name) const;
+   bool  isNull(QSqlRecord* theWrappedObject, int  i) const;
+   bool  __ne__(QSqlRecord* theWrappedObject, const QSqlRecord&  other) const;
+   bool  __eq__(QSqlRecord* theWrappedObject, const QSqlRecord&  other) const;
+   void remove(QSqlRecord* theWrappedObject, int  pos);
+   void replace(QSqlRecord* theWrappedObject, int  pos, const QSqlField&  field);
+   void setGenerated(QSqlRecord* theWrappedObject, const QString&  name, bool  generated);
+   void setGenerated(QSqlRecord* theWrappedObject, int  i, bool  generated);
+   void setNull(QSqlRecord* theWrappedObject, const QString&  name);
+   void setNull(QSqlRecord* theWrappedObject, int  i);
+   void setValue(QSqlRecord* theWrappedObject, const QString&  name, const QVariant&  val);
+   void setValue(QSqlRecord* theWrappedObject, int  i, const QVariant&  val);
+   QVariant  value(QSqlRecord* theWrappedObject, const QString&  name) const;
+   QVariant  value(QSqlRecord* theWrappedObject, int  i) const;
     QString py_toString(QSqlRecord*);
 };
 
@@ -555,10 +559,10 @@ QSqlRelation* a = new QSqlRelation();
 *((QSqlRelation*)a) = other;
 return a; }
 void delete_QSqlRelation(QSqlRelation* obj) { delete obj; } 
-    QString  displayColumn(QSqlRelation* theWrappedObject) const;
-    QString  indexColumn(QSqlRelation* theWrappedObject) const;
-    bool  isValid(QSqlRelation* theWrappedObject) const;
-    QString  tableName(QSqlRelation* theWrappedObject) const;
+   QString  displayColumn(QSqlRelation* theWrappedObject) const;
+   QString  indexColumn(QSqlRelation* theWrappedObject) const;
+   bool  isValid(QSqlRelation* theWrappedObject) const;
+   QString  tableName(QSqlRelation* theWrappedObject) const;
 };
 
 
@@ -650,23 +654,27 @@ inline bool  promoted_updateRowInTable(int  row, const QSqlRecord&  values) { re
 class PythonQtWrapper_QSqlRelationalTableModel : public QObject
 { Q_OBJECT
 public:
+Q_ENUMS(JoinMode )
+enum JoinMode{
+  InnerJoin = QSqlRelationalTableModel::InnerJoin,   LeftJoin = QSqlRelationalTableModel::LeftJoin};
 public slots:
 QSqlRelationalTableModel* new_QSqlRelationalTableModel(QObject*  parent = 0, QSqlDatabase  db = QSqlDatabase());
 void delete_QSqlRelationalTableModel(QSqlRelationalTableModel* obj) { delete obj; } 
-    void clear(QSqlRelationalTableModel* theWrappedObject);
-    QVariant  data(QSqlRelationalTableModel* theWrappedObject, const QModelIndex&  item, int  role = Qt::DisplayRole) const;
-    bool  insertRowIntoTable(QSqlRelationalTableModel* theWrappedObject, const QSqlRecord&  values);
-    QString  orderByClause(QSqlRelationalTableModel* theWrappedObject) const;
-    QSqlRelation  relation(QSqlRelationalTableModel* theWrappedObject, int  column) const;
-    QSqlTableModel*  relationModel(QSqlRelationalTableModel* theWrappedObject, int  column) const;
-    bool  removeColumns(QSqlRelationalTableModel* theWrappedObject, int  column, int  count, const QModelIndex&  parent = QModelIndex());
-    void revertRow(QSqlRelationalTableModel* theWrappedObject, int  row);
-    bool  select(QSqlRelationalTableModel* theWrappedObject);
-    QString  selectStatement(QSqlRelationalTableModel* theWrappedObject) const;
-    bool  setData(QSqlRelationalTableModel* theWrappedObject, const QModelIndex&  item, const QVariant&  value, int  role = Qt::EditRole);
-    void setRelation(QSqlRelationalTableModel* theWrappedObject, int  column, const QSqlRelation&  relation);
-    void setTable(QSqlRelationalTableModel* theWrappedObject, const QString&  tableName);
-    bool  updateRowInTable(QSqlRelationalTableModel* theWrappedObject, int  row, const QSqlRecord&  values);
+   void clear(QSqlRelationalTableModel* theWrappedObject);
+   QVariant  data(QSqlRelationalTableModel* theWrappedObject, const QModelIndex&  item, int  role = Qt::DisplayRole) const;
+   bool  insertRowIntoTable(QSqlRelationalTableModel* theWrappedObject, const QSqlRecord&  values);
+   QString  orderByClause(QSqlRelationalTableModel* theWrappedObject) const;
+   QSqlRelation  relation(QSqlRelationalTableModel* theWrappedObject, int  column) const;
+   QSqlTableModel*  relationModel(QSqlRelationalTableModel* theWrappedObject, int  column) const;
+   bool  removeColumns(QSqlRelationalTableModel* theWrappedObject, int  column, int  count, const QModelIndex&  parent = QModelIndex());
+   void revertRow(QSqlRelationalTableModel* theWrappedObject, int  row);
+   bool  select(QSqlRelationalTableModel* theWrappedObject);
+   QString  selectStatement(QSqlRelationalTableModel* theWrappedObject) const;
+   bool  setData(QSqlRelationalTableModel* theWrappedObject, const QModelIndex&  item, const QVariant&  value, int  role = Qt::EditRole);
+   void setJoinMode(QSqlRelationalTableModel* theWrappedObject, QSqlRelationalTableModel::JoinMode  joinMode);
+   void setRelation(QSqlRelationalTableModel* theWrappedObject, int  column, const QSqlRelation&  relation);
+   void setTable(QSqlRelationalTableModel* theWrappedObject, const QString&  tableName);
+   bool  updateRowInTable(QSqlRelationalTableModel* theWrappedObject, int  row, const QSqlRecord&  values);
 };
 
 
@@ -742,26 +750,26 @@ class PythonQtWrapper_QSqlResult : public QObject
 public:
 public slots:
 void delete_QSqlResult(QSqlResult* obj) { delete obj; } 
-    void bindValue(QSqlResult* theWrappedObject, const QString&  placeholder, const QVariant&  val, QSql::ParamType  type);
-    void bindValue(QSqlResult* theWrappedObject, int  pos, const QVariant&  val, QSql::ParamType  type);
-    void detachFromResultSet(QSqlResult* theWrappedObject);
-    bool  exec(QSqlResult* theWrappedObject);
-    bool  execBatch(QSqlResult* theWrappedObject, bool  arrayBind = false);
-    bool  fetchNext(QSqlResult* theWrappedObject);
-    bool  fetchPrevious(QSqlResult* theWrappedObject);
-    QVariant  handle(QSqlResult* theWrappedObject) const;
-    QVariant  lastInsertId(QSqlResult* theWrappedObject) const;
-    bool  nextResult(QSqlResult* theWrappedObject);
-    bool  prepare(QSqlResult* theWrappedObject, const QString&  query);
-    QSqlRecord  record(QSqlResult* theWrappedObject) const;
-    bool  savePrepare(QSqlResult* theWrappedObject, const QString&  sqlquery);
-    void setActive(QSqlResult* theWrappedObject, bool  a);
-    void setAt(QSqlResult* theWrappedObject, int  at);
-    void setForwardOnly(QSqlResult* theWrappedObject, bool  forward);
-    void setLastError(QSqlResult* theWrappedObject, const QSqlError&  e);
-    void setNumericalPrecisionPolicy(QSqlResult* theWrappedObject, QSql::NumericalPrecisionPolicy  policy);
-    void setQuery(QSqlResult* theWrappedObject, const QString&  query);
-    void setSelect(QSqlResult* theWrappedObject, bool  s);
+   void bindValue(QSqlResult* theWrappedObject, const QString&  placeholder, const QVariant&  val, QSql::ParamType  type);
+   void bindValue(QSqlResult* theWrappedObject, int  pos, const QVariant&  val, QSql::ParamType  type);
+   void detachFromResultSet(QSqlResult* theWrappedObject);
+   bool  exec(QSqlResult* theWrappedObject);
+   bool  execBatch(QSqlResult* theWrappedObject, bool  arrayBind = false);
+   bool  fetchNext(QSqlResult* theWrappedObject);
+   bool  fetchPrevious(QSqlResult* theWrappedObject);
+   QVariant  handle(QSqlResult* theWrappedObject) const;
+   QVariant  lastInsertId(QSqlResult* theWrappedObject) const;
+   bool  nextResult(QSqlResult* theWrappedObject);
+   bool  prepare(QSqlResult* theWrappedObject, const QString&  query);
+   QSqlRecord  record(QSqlResult* theWrappedObject) const;
+   bool  savePrepare(QSqlResult* theWrappedObject, const QString&  sqlquery);
+   void setActive(QSqlResult* theWrappedObject, bool  a);
+   void setAt(QSqlResult* theWrappedObject, int  at);
+   void setForwardOnly(QSqlResult* theWrappedObject, bool  forward);
+   void setLastError(QSqlResult* theWrappedObject, const QSqlError&  e);
+   void setNumericalPrecisionPolicy(QSqlResult* theWrappedObject, QSql::NumericalPrecisionPolicy  policy);
+   void setQuery(QSqlResult* theWrappedObject, const QString&  query);
+   void setSelect(QSqlResult* theWrappedObject, bool  s);
 };
 
 
@@ -869,43 +877,43 @@ enum EditStrategy{
 public slots:
 QSqlTableModel* new_QSqlTableModel(QObject*  parent = 0, QSqlDatabase  db = QSqlDatabase());
 void delete_QSqlTableModel(QSqlTableModel* obj) { delete obj; } 
-    void clear(QSqlTableModel* theWrappedObject);
-    QVariant  data(QSqlTableModel* theWrappedObject, const QModelIndex&  idx, int  role = Qt::DisplayRole) const;
-    QSqlDatabase  database(QSqlTableModel* theWrappedObject) const;
-    bool  deleteRowFromTable(QSqlTableModel* theWrappedObject, int  row);
-    QSqlTableModel::EditStrategy  editStrategy(QSqlTableModel* theWrappedObject) const;
-    int  fieldIndex(QSqlTableModel* theWrappedObject, const QString&  fieldName) const;
-    QString  filter(QSqlTableModel* theWrappedObject) const;
-    Qt::ItemFlags  flags(QSqlTableModel* theWrappedObject, const QModelIndex&  index) const;
-    QVariant  headerData(QSqlTableModel* theWrappedObject, int  section, Qt::Orientation  orientation, int  role = Qt::DisplayRole) const;
-    QModelIndex  indexInQuery(QSqlTableModel* theWrappedObject, const QModelIndex&  item) const;
-    bool  insertRecord(QSqlTableModel* theWrappedObject, int  row, const QSqlRecord&  record);
-    bool  insertRowIntoTable(QSqlTableModel* theWrappedObject, const QSqlRecord&  values);
-    bool  insertRows(QSqlTableModel* theWrappedObject, int  row, int  count, const QModelIndex&  parent = QModelIndex());
-    bool  isDirty(QSqlTableModel* theWrappedObject) const;
-    bool  isDirty(QSqlTableModel* theWrappedObject, const QModelIndex&  index) const;
-    QString  orderByClause(QSqlTableModel* theWrappedObject) const;
-    QSqlIndex  primaryKey(QSqlTableModel* theWrappedObject) const;
-    QSqlRecord  record(QSqlTableModel* theWrappedObject) const;
-    QSqlRecord  record(QSqlTableModel* theWrappedObject, int  row) const;
-    bool  removeColumns(QSqlTableModel* theWrappedObject, int  column, int  count, const QModelIndex&  parent = QModelIndex());
-    bool  removeRows(QSqlTableModel* theWrappedObject, int  row, int  count, const QModelIndex&  parent = QModelIndex());
-    void revert(QSqlTableModel* theWrappedObject);
-    void revertRow(QSqlTableModel* theWrappedObject, int  row);
-    int  rowCount(QSqlTableModel* theWrappedObject, const QModelIndex&  parent = QModelIndex()) const;
-    bool  select(QSqlTableModel* theWrappedObject);
-    bool  selectRow(QSqlTableModel* theWrappedObject, int  row);
-    QString  selectStatement(QSqlTableModel* theWrappedObject) const;
-    bool  setData(QSqlTableModel* theWrappedObject, const QModelIndex&  index, const QVariant&  value, int  role = Qt::EditRole);
-    void setEditStrategy(QSqlTableModel* theWrappedObject, QSqlTableModel::EditStrategy  strategy);
-    void setFilter(QSqlTableModel* theWrappedObject, const QString&  filter);
-    bool  setRecord(QSqlTableModel* theWrappedObject, int  row, const QSqlRecord&  record);
-    void setSort(QSqlTableModel* theWrappedObject, int  column, Qt::SortOrder  order);
-    void setTable(QSqlTableModel* theWrappedObject, const QString&  tableName);
-    void sort(QSqlTableModel* theWrappedObject, int  column, Qt::SortOrder  order);
-    bool  submit(QSqlTableModel* theWrappedObject);
-    QString  tableName(QSqlTableModel* theWrappedObject) const;
-    bool  updateRowInTable(QSqlTableModel* theWrappedObject, int  row, const QSqlRecord&  values);
+   void clear(QSqlTableModel* theWrappedObject);
+   QVariant  data(QSqlTableModel* theWrappedObject, const QModelIndex&  idx, int  role = Qt::DisplayRole) const;
+   QSqlDatabase  database(QSqlTableModel* theWrappedObject) const;
+   bool  deleteRowFromTable(QSqlTableModel* theWrappedObject, int  row);
+   QSqlTableModel::EditStrategy  editStrategy(QSqlTableModel* theWrappedObject) const;
+   int  fieldIndex(QSqlTableModel* theWrappedObject, const QString&  fieldName) const;
+   QString  filter(QSqlTableModel* theWrappedObject) const;
+   Qt::ItemFlags  flags(QSqlTableModel* theWrappedObject, const QModelIndex&  index) const;
+   QVariant  headerData(QSqlTableModel* theWrappedObject, int  section, Qt::Orientation  orientation, int  role = Qt::DisplayRole) const;
+   QModelIndex  indexInQuery(QSqlTableModel* theWrappedObject, const QModelIndex&  item) const;
+   bool  insertRecord(QSqlTableModel* theWrappedObject, int  row, const QSqlRecord&  record);
+   bool  insertRowIntoTable(QSqlTableModel* theWrappedObject, const QSqlRecord&  values);
+   bool  insertRows(QSqlTableModel* theWrappedObject, int  row, int  count, const QModelIndex&  parent = QModelIndex());
+   bool  isDirty(QSqlTableModel* theWrappedObject) const;
+   bool  isDirty(QSqlTableModel* theWrappedObject, const QModelIndex&  index) const;
+   QString  orderByClause(QSqlTableModel* theWrappedObject) const;
+   QSqlIndex  primaryKey(QSqlTableModel* theWrappedObject) const;
+   QSqlRecord  record(QSqlTableModel* theWrappedObject) const;
+   QSqlRecord  record(QSqlTableModel* theWrappedObject, int  row) const;
+   bool  removeColumns(QSqlTableModel* theWrappedObject, int  column, int  count, const QModelIndex&  parent = QModelIndex());
+   bool  removeRows(QSqlTableModel* theWrappedObject, int  row, int  count, const QModelIndex&  parent = QModelIndex());
+   void revert(QSqlTableModel* theWrappedObject);
+   void revertRow(QSqlTableModel* theWrappedObject, int  row);
+   int  rowCount(QSqlTableModel* theWrappedObject, const QModelIndex&  parent = QModelIndex()) const;
+   bool  select(QSqlTableModel* theWrappedObject);
+   bool  selectRow(QSqlTableModel* theWrappedObject, int  row);
+   QString  selectStatement(QSqlTableModel* theWrappedObject) const;
+   bool  setData(QSqlTableModel* theWrappedObject, const QModelIndex&  index, const QVariant&  value, int  role = Qt::EditRole);
+   void setEditStrategy(QSqlTableModel* theWrappedObject, QSqlTableModel::EditStrategy  strategy);
+   void setFilter(QSqlTableModel* theWrappedObject, const QString&  filter);
+   bool  setRecord(QSqlTableModel* theWrappedObject, int  row, const QSqlRecord&  record);
+   void setSort(QSqlTableModel* theWrappedObject, int  column, Qt::SortOrder  order);
+   void setTable(QSqlTableModel* theWrappedObject, const QString&  tableName);
+   void sort(QSqlTableModel* theWrappedObject, int  column, Qt::SortOrder  order);
+   bool  submit(QSqlTableModel* theWrappedObject);
+   QString  tableName(QSqlTableModel* theWrappedObject) const;
+   bool  updateRowInTable(QSqlTableModel* theWrappedObject, int  row, const QSqlRecord&  values);
 };
 
 

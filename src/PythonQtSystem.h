@@ -42,12 +42,12 @@
 */
 //----------------------------------------------------------------------------------
 
-#ifdef WIN32
-#ifdef PYTHONQT_EXPORTS
+#if defined(WIN32) && defined(PYTHONQT_EXPORTS ) && !defined(PYTHONQT_STATIC)
 #define PYTHONQT_EXPORT __declspec(dllexport)
-#else
+#elif defined(WIN32) && !defined(PYTHONQT_EXPORTS ) && !defined(PYTHONQT_STATIC) 
 #define PYTHONQT_EXPORT __declspec(dllimport)
-#endif
+#elif __GNUC__ >= 4
+#define PYTHONQT_EXPORT __attribute__ ((visibility ("default")))
 #else
 #define PYTHONQT_EXPORT
 #endif
